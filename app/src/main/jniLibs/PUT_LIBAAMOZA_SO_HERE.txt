@@ -1,0 +1,3 @@
+Place libaamoza.so here:
+  arm64-v8a/libaamoza.so
+  armeabi-v7a/libaamoza.so
