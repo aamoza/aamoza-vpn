@@ -2,61 +2,73 @@
 
 **ساخته شده توسط [t.me/aamoza](https://t.me/aamoza)**
 
-کلاینت اندروید مدرن با معماری دو موتوره (WARP + Worker).
+کلاینت VPN چندموتوره برای اندروید با UI مدرن (Jetpack Compose + Material 3).
 
-> Dual-engine Android client — Cloudflare WARP (MASQUE / WireGuard) + improved Worker path.
+| موتور | توضیح |
+|--------|--------|
+| **WARP** | آماده برای هسته Aether (MASQUE + WireGuard) + توکن Cloudflare |
+| **Worker** | آماده برای Xray / sing-box (VLESS / Trojan) |
+
+> این نسخه اسکلت کامل UI + سرویس VPN + مدیریت دو موتور را دارد. برای اتصال واقعی باید فایل‌های native (`.so`) اضافه شوند.
 
 ---
 
-## ویژگی‌ها
+## ساده‌ترین راه بیلد (پیشنهادی)
 
-- موتور **WARP** با پشتیبانی از MASQUE و WireGuard
-- موتور **Worker** با دامنه شخصی و Clean IP
-- سوئیچ سریع بین دو مسیر
-- رابط کاربری تمیز با Jetpack Compose + Material 3
-- Split Tunneling آماده
-- پشتیبانی از توکن Cloudflare
-- برندینگ کامل: **aamoza vpn**
+1. پروژه را از گیت‌هاب دانلود یا Clone کنید
+2. با **Android Studio** باز کنید (Ladybug یا جدیدتر)
+3. اگر Gradle Wrapper خواست، گزینه Generate / Sync را بزنید
+4. از منو: **Build → Build Bundle(s) / APK(s) → Build APK(s)**
+5. فایل APK در مسیر `app/build/outputs/apk/` ساخته می‌شود
 
-## وضعیت فعلی
+نیازی به دستور خط فرمان یا نصب جداگانه Gradle نیست.
 
-این ریپازیتوری یک **پایه‌ی تمیز، مدرن و آماده توسعه** است:
+---
 
-- ساختار کامل Android (Kotlin + Compose)
-- UI کامل با دو حالت WARP / Worker
-- اسکلت VpnService
-- GitHub Actions برای بیلد خودکار
-- آماده برای اضافه کردن هسته‌های واقعی (Aether / Xray / sing-box)
+## بیلد با GitHub Actions
 
-## بیلد
+هر پوش روی `main` به‌صورت خودکار APK می‌سازد. از تب **Actions** فایل را از Artifacts دانلود کنید.
+
+---
+
+## امضای Release (کاهش هشدار «برنامه خطرناک»)
 
 ```bash
-git clone https://github.com/aamoza/aamoza-vpn.git
-cd aamoza-vpn
-./gradlew assembleDebug
+keytool -genkeypair -v -keystore aamoza.keystore -alias aamoza -keyalg RSA -keysize 2048 -validity 10950
 ```
 
-APK در مسیر:
-`app/build/outputs/apk/debug/app-debug.apk`
+فایل `keystore.properties` بسازید:
 
-### GitHub Actions
-هر پوش روی `main` به صورت خودکار Debug APK می‌سازد.
-
-## ساختار
-
-```
-app/src/main/java/com/aamoza/vpn/
-├── MainActivity.kt
-├── ui/               # Compose screens & theme
-├── service/          # VpnService
-└── data/             # models & preferences
+```properties
+storeFile=aamoza.keystore
+storePassword=پسورد_شما
+keyAlias=aamoza
+keyPassword=پسورد_شما
 ```
 
-## لایسنس
-
-MIT
+سپس در Android Studio بیلد Release بگیرید. این فایل‌ها را داخل گیت نگذارید.
 
 ---
 
-**ساخته شده با دقت توسط t.me/aamoza**  
-اگر مفید بود، ستاره بده ★
+## هسته Native
+
+محل قرارگیری:
+
+```
+app/src/main/jniLibs/arm64-v8a/libaamoza.so
+app/src/main/jniLibs/armeabi-v7a/libaamoza.so
+```
+
+بدون این فایل‌ها اپ نصب و اجرا می‌شود، اما اتصال واقعی برقرار نمی‌شود.
+
+---
+
+## مشخصات
+
+- پکیج: `com.aamoza.vpn`
+- minSdk 26 / targetSdk 35
+- Kotlin + Compose + Material 3
+- VpnService رسمی اندروید
+- ProGuard برای Release فعال
+
+ساخته شده توسط **t.me/aamoza**
