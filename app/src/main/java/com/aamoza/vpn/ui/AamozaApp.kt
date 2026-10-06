@@ -74,7 +74,7 @@ fun AamozaApp(
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(Modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Mode selector
             Row(

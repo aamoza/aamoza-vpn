@@ -20,6 +20,7 @@ object NativeLibLoader {
         return try {
             System.loadLibrary("aamoza")
             loaded = true
+            true
         } catch (t: Throwable) {
             false
         }
