@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aamoza vpn</string>
+    <string name="made_by">ساخته شده توسط t.me/aamoza</string>
+    <string name="connect">اتصال</string>
+    <string name="disconnect">قطع اتصال</string>
+    <string name="warp_mode">WARP</string>
+    <string name="worker_mode">Worker</string>
+    <string name="status_disconnected">قطع</string>
+    <string name="status_connecting">در حال اتصال…</string>
+    <string name="status_connected">متصل</string>
+    <string name="token_hint">توکن Cloudflare را وارد کنید</string>
+    <string name="worker_url_hint">آدرس Worker یا دامنه</string>
+    <string name="about_title">درباره</string>
+    <string name="about_body">aamoza vpn\nنسخه ۱.۰.۰\n\nساخته شده توسط t.me/aamoza\n\nDual-engine: WARP + Worker</string>
+</resources>
